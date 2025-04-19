@@ -1,6 +1,6 @@
 # Recipes and Ratings Analysis  
 By: Aayush Sharma  
-Contact: *(your website link or email)*
+Contact: *(aayushsh@umich.edu)*
 
 ## Introduction  
 This project explores recipe and user interaction data from Food.com, a major recipe sharing platform. The dataset includes thousands of recipes along with user-submitted ratings and reviews dating back to 2008. Our investigative question is: **How can we predict the number of calories for a recipe in the dataset?**
@@ -18,8 +18,29 @@ By modeling calorie content based on recipe features, we can gain insight into w
 ## Dataset Overview  
 We use two datasets from Food.com:
 
-- `RAW_recipes.csv` — Contains **83,782** recipes with information on ingredients, preparation steps, and nutrition  
-- `RAW_interactions.csv` — Contains **731,927** user reviews and ratings  
+- `RAW_recipes.csv` — Contains **83,782** recipes with information on ingredients, preparation steps, and nutrition
+
+<div align="center">
+  <iframe
+   src="assets/recipes-head.html"
+   width="800"
+   height="400"
+   frameborder="0">
+  </iframe>
+  <p><em>Table 1: First five rows of the RAW_recipes.csv dataset.</em></p>
+</div>
+
+- `RAW_interactions.csv` — Contains **731,927** user reviews and ratings
+
+<div align="center">
+  <iframe
+   src="assets/interactions-head.html"
+   width="800"
+   height="400"
+   frameborder="0">
+  </iframe>
+  <p><em>Table 2: First five rows of the RAW_interactions.csv dataset.</em></p>
+</div>
 
 While the second dataset helps understand user preferences, the primary focus for this analysis is on the first dataset, where the nutritional content is available.
 
@@ -43,4 +64,3 @@ From `RAW_interactions.csv`:
 - `review`: Optional written review by the user 
 
 These features will be used to build a model capable of predicting the calorie content of a recipe based on its nutritional profile and complexity.
-
