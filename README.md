@@ -85,3 +85,66 @@ Note: While this dataset helps understand user preferences, the primary focus fo
 
 These features will be used to build a model capable of predicting the calorie content of a recipe based on its nutritional profile and complexity.
 
+## Step 2: Data Cleaning and Exploratory Data Analysis
+
+To prepare the dataset for analysis, I carried out a series of data cleaning steps aimed at ensuring the quality and reliability of the information. Below is a breakdown of each step taken.
+
+---
+
+### 1. Merging Datasets
+
+I began by merging the two datasets. I performed a **left join** using the recipe ID to combine these datasets, ensuring that all recipe entries were preserved even if some did not have associated user feedback. After the merge, I removed the redundant `recipe_id` column that was duplicated in the merged result.
+
+---
+
+### 2. Cleaning the Rating Column
+
+Some recipes had a rating value of `0`, which is not a valid rating in the context of the platform (ratings typically range from 1 to 5). These zeroes likely represented missing or incorrect data. To avoid skewing the results, I replaced all zero values in the `rating` column with `NaN` to mark them as missing.
+
+---
+
+### 3. Calculating Average Rating per Recipe
+
+I grouped the data by `recipe ID` and computed the mean of the valid (non-missing) ratings. This provided a more accurate picture of how each recipe was rated by users on average.
+
+---
+
+### 4. Merging Average Ratings into the Main Dataset
+
+I merged the calculated average rating back into the main dataset so that each row, which represents a user interaction or review, also included the average rating for the corresponding recipe. This enriched the dataset and allowed for more detailed comparisons and filtering.
+
+---
+
+### 5. Expanding and Cleaning Nutrition Data
+
+The dataset included a `nutrition` column that stored nutritional data as a stringified list. I parsed this list and split it into individual columns, including:
+- `calories`
+- `total_fat`
+- `sugar`
+- `sodium`
+- `protein`
+- `saturated_fat`
+- `carbohydrates`
+
+Once these values were extracted and structured, I removed the original `nutrition` column to eliminate redundancy.
+
+---
+
+
+---
+
+### Final Output
+
+After these cleaning steps, the dataset was significantly more structured, with invalid data removed and additional features such as average ratings and detailed nutrition values included to support deeper analysis.
+
+---
+
+### Preview of the Cleaned DataFrame
+
+| name                                 | id      | minutes | contributor_id | submitted   | tags                                                                                                                                     | n_steps | steps                                                                                                                             | description                                                                                                                                          | ingredients                                                                                                                           | n_ingredients | user_id  | date       | rating | review                                                                                                                                          | rating_average | calories | total_fat | sugar | sodium | protein | saturated_fat | carbohydrates |
+|--------------------------------------|---------|---------|----------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|---------------|----------|------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------|----------------|----------|------------|-------|--------|---------|----------------|----------------|
+| 1 brownies in the world best ever    | 333281  | 40      | 985201         | 2008-10-27  | ['60-minutes-or-less', 'time-to-make', 'course', 'main-ingredient', 'preparation', 'for-large-groups']                                   | 10      | ['heat the oven to 350f and arrange the rack in the middle', 'line an 8-by-8-inch glass baking dish...']                      | these are the most; chocolatey, moist, rich, dense, fudgy, delicious brownies that you'll ever make...                             | ['bittersweet chocolate', 'unsalted butter', 'eggs', 'granulated sugar', 'unsweetened cocoa powder'...]                           | 9             | 387000   | 2008-11-19 | 4.0    | These were pretty good, but took forever to bake. I would send it ended up being almost an hour...                                  | 4.0            | 138.4    | 10.0       | 50.0  | 3.0    | 3.0     | 19.0           | 6.0            |
+| 1 in canada chocolate chip cookies   | 453467  | 45      | 1848091        | 2011-04-11  | ['60-minutes-or-less', 'time-to-make', 'cuisine', 'preparation', 'north-american', 'for-large-groups']                                   | 12      | ['pre-heat oven the 350 degrees f', 'in a mixing bowl , sift together the flours and baking powder...']                     | this is the recipe that we use at my school cafeteria for chocolate chip cookies. they must be the best...                        | ['white sugar', 'brown sugar', 'salt', 'margarine', 'eggs', 'vanilla', 'water', 'all-purpose flour'...]                          | 11            | 425000   | 2012-01-26 | 5.0    | Originally I was gonna cut the recipe in half (just the 2 of us here), but then we had a park-wide cookie craving...              | 5.0            | 595.1    | 46.0       | 211.0 | 22.0   | 13.0    | 51.0           | 26.0           |
+| 412 broccoli casserole               | 306168  | 40      | 50969          | 2008-05-30  | ['60-minutes-or-less', 'time-to-make', 'course', 'main-ingredient', 'preparation', 'side-dishes']                                       | 6       | ['preheat oven to 350 degrees', 'spray a 2 quart baking dish with cooking spray , set aside', 'in a large bowl mix...']       | since there are already 411 recipes for broccoli casserole posted to "zaar" ,i decided to call this one 412 broccoli casserole... | ['frozen broccoli cuts', 'cream of chicken soup', 'sharp cheddar cheese', 'garlic powder', 'ground pepper'...]                   | 9             | 29800    | 2008-12-31 | 5.0    | This was one of the best broccoli casseroles that I have ever made. I made my own chicken soup and it turned out delicious...    | 5.0            | 194.8    | 20.0       | 6.0   | 32.0   | 22.0    | 36.0           | 3.0            |
+| 412 broccoli casserole               | 306168  | 40      | 50969          | 2008-05-30  | ['60-minutes-or-less', 'time-to-make', 'course', 'main-ingredient', 'preparation', 'side-dishes']                                       | 6       | ['preheat oven to 350 degrees', 'spray a 2 quart baking dish with cooking spray , set aside', 'in a large bowl mix...']       | since there are already 411 recipes for broccoli casserole posted to "zaar" ,i decided to call this one 412 broccoli casserole... | ['frozen broccoli cuts', 'cream of chicken soup', 'sharp cheddar cheese', 'garlic powder', 'ground pepper'...]                   | 9             | 1200000  | 2009-04-13 | 5.0    | I made this for my son's first birthday party this weekend. Our guests INHALED it! Everyone kept asking for the recipe...         | 5.0            | 194.8    | 20.0       | 6.0   | 32.0   | 22.0    | 36.0           | 3.0            |
+| 412 broccoli casserole               | 306168  | 40      | 50969          | 2008-05-30  | ['60-minutes-or-less', 'time-to-make', 'course', 'main-ingredient', 'preparation', 'side-dishes']                                       | 6       | ['preheat oven to 350 degrees', 'spray a 2 quart baking dish with cooking spray , set aside', 'in a large bowl mix...']       | since there are already 411 recipes for broccoli casserole posted to "zaar" ,i decided to call this one 412 broccoli casserole... | ['frozen broccoli cuts', 'cream of chicken soup', 'sharp cheddar cheese', 'garlic powder', 'ground pepper'...]                   | 9             | 769000   | 2013-08-02 | 5.0    | Loved this. Be sure to completely thaw the broccoli. I didn’t and it didn’t get done...                                            | 5.0            | 194.8    | 20.0       | 6.0   | 32.0   | 22.0    | 36.0           | 3.0            |
