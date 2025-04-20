@@ -46,7 +46,7 @@ We use two datasets from Food.com.
 **Description:** Contains 731,927 user reviews and ratings.
 
 **Table 2: Sample from `RAW_interactions.csv`**
-<div style="overflow-x: auto; white-space: nowrap;">
+<iframe src="./assets/recipes-head.html" style="width: 100%; height: 600px; border: none; overflow: auto;"></iframe>
 
 | user_id   | recipe_id | date       | rating | review                                                                                                                                                                                                      |
 |-----------|-----------|------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -56,7 +56,6 @@ We use two datasets from Food.com.
 | 124416    | 120345    | 2011-08-06 | 0      | Just an observation, so I will not rate. I followed this procedure with strawberries instead of raspberries. Perhaps this is the reason it did not work well. Sorry to report that the strawberries I used were disappointing. |
 | 2000192946| 120345    | 2015-05-10 | 2      | This recipe was OVERLY too sweet. I would start out with 1/3 or 1/4 cup of sugar and just add on from there. Just 2 cups was way too much and I had to go back to the grocery store to buy more raspberries. |
 
-</div>
 Note: While this dataset helps understand user preferences, the primary focus for this analysis is on the first dataset, where the nutritional content is available.
 
 ---
