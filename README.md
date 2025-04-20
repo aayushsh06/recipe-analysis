@@ -32,7 +32,7 @@ We use two datasets from Food.com.
 **Description:** Contains 83,782 recipes with ingredients, steps, and nutrition information.
 
 **Table 1: Sample from `RAW_recipes.csv`**
-<div style="width: 600px; overflow-x: auto;">
+<div style="width: 800px; height: 500px; overflow-x: auto;">
   <iframe src="./assets/recipes-head.html" style="width: 1000px; border: none;"></iframe>
 </div>
 
@@ -40,15 +40,9 @@ We use two datasets from Food.com.
 **Description:** Contains 731,927 user reviews and ratings.
 
 **Table 2: Sample from `RAW_interactions.csv`**
-<iframe src="./assets/interactions-head.html"></iframe>
-
-| user_id   | recipe_id | date       | rating | review                                                                                                                                                                                                      |
-|-----------|-----------|------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1293707   | 40893     | 2011-12-21 | 5      | So simple, so delicious! Great for chilly fall evening. Should have doubled it ;)<br/><br/>Second time around, forgot the remaining cumin. We usually love cumin, but didn't notice the missing 1/2 teaspoon. |
-| 126440    | 85009     | 2010-02-27 | 5      | I made the Mexican topping and took it to bunko. Everyone loved it.                                                                                                                                        |
-| 57222     | 85009     | 2011-10-01 | 5      | Made the cheddar bacon topping, adding a sprinkling of black pepper. Yum!                                                                                                                                   |
-| 124416    | 120345    | 2011-08-06 | 0      | Just an observation, so I will not rate. I followed this procedure with strawberries instead of raspberries. Perhaps this is the reason it did not work well. Sorry to report that the strawberries I used were disappointing. |
-| 2000192946| 120345    | 2015-05-10 | 2      | This recipe was OVERLY too sweet. I would start out with 1/3 or 1/4 cup of sugar and just add on from there. Just 2 cups was way too much and I had to go back to the grocery store to buy more raspberries. |
+<div style="width: 800px; height: 500px; overflow-x: auto;">
+  <iframe src="./assets/interactions-head.html" style="width: 1000px; border: none;"></iframe>
+</div>
 
 Note: While this dataset helps understand user preferences, the primary focus for this analysis is on the first dataset, where the nutritional content is available.
 
