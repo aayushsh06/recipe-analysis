@@ -193,7 +193,7 @@ This insight can guide feature engineering and help avoid bias in the model’s 
 <div style="margin: 0; padding: 0;">
   <iframe
     src="assets/fat_vs_calories.html"
-    width="2000"
+    width="1000"
     height="600"
     frameborder="0"
     style="display: block; margin: 0 auto; padding: 0;"
@@ -201,3 +201,24 @@ This insight can guide feature engineering and help avoid bias in the model’s 
 </div>
 
 This boxplot shows how calorie count varies across different levels of total fat content, with outliers removed. There's a clear upward trend — as total fat increases, so do the calories. The distribution also widens, indicating more variability in high-fat recipes. This supports the idea that total fat is a strong predictor of calories, and will likely be an important feature in the calorie prediction model.
+
+## Aggregate Analysis
+
+### Average Nutrient Values by Steps Group
+
+| Steps Group | Calories | Protein | Sugar | Total Fat |
+|-------------|----------|---------|-------|-----------|
+| Low         | 316.7    | 21.6    | 25.4  | 20.4      |
+| Medium      | 423.8    | 29.2    | 30.4  | 29.4      |
+| High        | 508.2    | 40.9    | 71.2  | 39.3      |
+
+<iframe
+src="assets/nutrient_bar_chart.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
+
+This pivot table groups recipes by the number of steps and shows the average nutritional values for each group. There's a clear upward trend: recipes with more steps tend to have more calories, protein, sugar, and fat.
+
+This is significant because it suggests that **step count could be a useful feature when predicting calories**. It captures a pattern in the data that could help a model better estimate calorie content based on how complex a recipe is.
