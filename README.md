@@ -32,7 +32,6 @@ We use two datasets from Food.com.
 **Description:** Contains 83,782 recipes with ingredients, steps, and nutrition information.
 
 **Table 1: Sample from `RAW_recipes.csv`**
-<div style="overflow-x: auto;">
 
 | name                                 |     id |   minutes |   contributor_id | submitted   | tags                                                                                                    | nutrition                                     |   n_steps | steps                                                                                                   | description                                                                                             | ingredients                                                                                                                                                                                                                             |   n_ingredients |
 |:-------------------------------------|-------:|----------:|-----------------:|:------------|:--------------------------------------------------------------------------------------------------------|:----------------------------------------------|----------:|:--------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------:|
@@ -42,7 +41,6 @@ We use two datasets from Food.com.
 | millionaire pound cake               | 286009 |       120 |           461724 | 2008-02-12  | ['time-to-make', 'course', 'cuisine', 'preparation', 'occasion', 'north-american', 'desserts', 'amer... | [878.3, 63.0, 326.0, 13.0, 20.0, 123.0, 39.0] |         7 | ['freheat the oven to 300 degrees', 'grease a 10-inch tube pan with butter , dust the bottom and sid... | why a millionaire pound cake?  because it's super rich!  this scrumptious cake is the pride of an el... | ['butter', 'sugar', 'eggs', 'all-purpose flour', 'whole milk', 'pure vanilla extract', 'almond extract']                                                                                                                                |               7 |
 | 2000 meatloaf                        | 475785 |        90 |          2202916 | 2012-03-06  | ['time-to-make', 'course', 'main-ingredient', 'preparation', 'main-dish', 'potatoes', 'vegetables', ... | [267.0, 30.0, 12.0, 12.0, 29.0, 48.0, 2.0]    |        17 | ['pan fry bacon , and set aside on a paper towel to absorb excess grease', 'mince yellow onion , red... | ready, set, cook! special edition contest entry: a mediterranean flavor inspired meatloaf dish. feat... | ['meatloaf mixture', 'unsmoked bacon', 'goat cheese', 'unsalted butter', 'eggs', 'baby spinach', 'yellow onion', 'red bell pepper', 'simply potatoes shredded hash browns', 'fresh garlic', 'kosher salt', 'white pepper', 'olive oil'] |              13 |
 
-</div>
 ### Dataset 2: `RAW_interactions.csv`  
 **Description:** Contains 731,927 user reviews and ratings.
 
@@ -222,3 +220,11 @@ frameborder="0"
 This pivot table groups recipes by the number of steps and shows the average nutritional values for each group. There's a clear upward trend: recipes with more steps tend to have more calories, protein, sugar, and fat.
 
 This is significant because it suggests that **step count could be a useful feature when predicting calories**. It captures a pattern in the data that could help a model better estimate calorie content based on how complex a recipe is.
+
+## Missing Values
+
+No imputation was performed. Instead, rows with missing values were dropped.
+
+In this context, imputing nutritional values (like calories, protein, sugar, etc.) isn’t appropriate — these features are specific to the ingredients in each recipe. Filling them with averages or estimates would distort the data and potentially mislead any predictive models.
+
+Out of 234,429 original recipes, 15,198 were removed due to missing values — a **6.48% decrease** in dataset size. This was an acceptable trade-off to preserve data integrity without introducing noise.
