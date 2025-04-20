@@ -183,3 +183,19 @@ Understanding this distribution is crucial for building a calorie prediction mod
 - Assessing the influence of sugar on calorie predictions.
 
 This insight can guide feature engineering and help avoid bias in the model’s output.
+
+## Bivariate Analysis
+
+### Calories vs. Total Fat
+
+<div style="margin: 0; padding: 0;">
+  <iframe
+    src="assets/fat_vs_calories.html"
+    width="800"
+    height="600"
+    frameborder="0"
+    style="display: block; margin: 0 auto; padding: 0;"
+  ></iframe>
+</div>
+
+This boxplot shows how calorie count varies across different levels of total fat content, with outliers removed. There's a clear upward trend — as total fat increases, so do the calories. The distribution also widens, indicating more variability in high-fat recipes. This supports the idea that total fat is a strong predictor of calories, and will likely be an important feature in the calorie prediction model.
