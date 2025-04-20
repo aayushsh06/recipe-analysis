@@ -130,9 +130,6 @@ Once these values were extracted and structured, I removed the original `nutriti
 
 ---
 
-
----
-
 ### Final Output
 
 After these cleaning steps, the dataset was significantly more structured, with invalid data removed and additional features such as average ratings and detailed nutrition values included to support deeper analysis.
