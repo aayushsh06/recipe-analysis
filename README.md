@@ -32,7 +32,7 @@ We use two datasets from Food.com.
 **Description:** Contains 83,782 recipes with ingredients, steps, and nutrition information.
 
 **Table 1: Sample from `RAW_recipes.csv`**
-<iframe src="./assets/recipes-head.html"></iframe>
+<iframe src="./assets/recipes-head.html" style="width: 1000px; border: none;"></iframe>
 
 ### Dataset 2: `RAW_interactions.csv`  
 **Description:** Contains 731,927 user reviews and ratings.
