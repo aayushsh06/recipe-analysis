@@ -33,6 +33,13 @@ We use two datasets from Food.com.
 
 **Table 1: Sample from `RAW_recipes.csv`**
 
+<iframe
+ src="assets/recipes-head.html"
+ width="800"
+ height="600"
+ frameborder="0"
+></iframe>
+
 | name                                 |     id |   minutes |   contributor_id | submitted   | tags                                                                                                    | nutrition                                     |   n_steps | steps                                                                                                   | description                                                                                             | ingredients                                                                                                                                                                                                                             |   n_ingredients |
 |:-------------------------------------|-------:|----------:|-----------------:|:------------|:--------------------------------------------------------------------------------------------------------|:----------------------------------------------|----------:|:--------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------:|
 | 1 brownies in the world    best ever | 333281 |        40 |           985201 | 2008-10-27  | ['60-minutes-or-less', 'time-to-make', 'course', 'main-ingredient', 'preparation', 'for-large-groups... | [138.4, 10.0, 50.0, 3.0, 3.0, 19.0, 6.0]      |        10 | ['heat the oven to 350f and arrange the rack in the middle', 'line an 8-by-8-inch glass baking dish ... | these are the most; chocolatey, moist, rich, dense, fudgy, delicious brownies that you'll ever make.... | ['bittersweet chocolate', 'unsalted butter', 'eggs', 'granulated sugar', 'unsweetened cocoa powder', 'vanilla extract', 'brewed espresso', 'kosher salt', 'all-purpose flour']                                                          |               9 |
@@ -157,7 +164,7 @@ After these cleaning steps, the dataset was significantly more structured, with 
  frameborder="0"
  ></iframe>
 
-The violin plot above visualizes the distribution of calorie values across all recipes, with outliers removed for clarity. The shape of the plot highlights the density of data points — showing that most recipes cluster around the 250–450 calorie range. The thickest part of the distribution, near the median, gives a quick sense of central tendency, while the tails show the spread of higher and lower calorie recipes.
+The violin plot above visualizes the distribution of calorie values across all recipes, with outliers removed for clarity. The shape of the plot highlights the density of data points — showing that most recipes cluster around the 175–450 calorie range. The thickest part of the distribution, near the median, gives a quick sense of central tendency, while the tails show the spread of higher and lower calorie recipes.
 
 This visualization is particularly useful for the calorie prediction task ahead. It helps identify:
 - The skewness of the distribution, which could impact model selection or preprocessing.
@@ -178,7 +185,7 @@ Understanding this distribution ensures the model is trained on realistic, well-
 This histogram shows the distribution of sugar content per recipe, with outliers removed. Most recipes contain less than 20 grams of sugar, with a sharp peak around the very low end — possibly indicating savory dishes or low-sugar meals. There is a long right tail, which suggests a minority of recipes (e.g. desserts or drinks) with much higher sugar content.
 
 Understanding this distribution is crucial for building a calorie prediction model. Since sugar is often a strong contributor to calorie count, observing its skew and overall spread helps in:
-- Identifying whether transformations are needed (e.g., log-scaling).
+- Identifying whether transformations are needed to correct skewness (e.g., QuantileTransformer).
 - Spotting imbalances in recipe types (sweet vs. savory).
 - Assessing the influence of sugar on calorie predictions.
 
