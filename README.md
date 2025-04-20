@@ -46,7 +46,7 @@ We use two datasets from Food.com.
 **Description:** Contains 731,927 user reviews and ratings.
 
 **Table 2: Sample from `RAW_interactions.csv`**
-<iframe src="./assets/recipes-head.html" style="width: 100%; height: 600px; border: none; overflow: auto;"></iframe>
+<iframe src="./assets/interactions-head.html" style="width: 100%; height: 600px; border: none; overflow: auto;"></iframe>
 
 | user_id   | recipe_id | date       | rating | review                                                                                                                                                                                                      |
 |-----------|-----------|------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
