@@ -31,6 +31,8 @@ We use two datasets from Food.com.
 ### Dataset 1: `RAW_recipes.csv`  
 **Description:** Contains 83,782 recipes with ingredients, steps, and nutrition information.
 
+###### *Only relevant columns to analysis are being displayed
+
 **Table 1: Sample from `RAW_recipes.csv`**
 
 | name                                 |     id |   minutes | nutrition                                     |   n_steps |
@@ -60,7 +62,7 @@ Note: While this dataset helps understand user preferences, the primary focus fo
 
 ## Relevant Columns for Our Analysis  
 
-### From `RAW_recipes.csv`:
+### From Both Datasets:
 
 | Column           | Description                                      |
 |------------------|--------------------------------------------------|
@@ -72,20 +74,12 @@ Note: While this dataset helps understand user preferences, the primary focus fo
 | `saturated_fat`  | Saturated fat content (% Daily Value)            |
 | `n_ingredients`  | Number of ingredients                            |
 | `n_steps`        | Number of preparation steps                      |
-
-### From `RAW_interactions.csv`:
-
-| Column     | Description                                       |
-|------------|---------------------------------------------------|
-| `user_id`  | Identifier for the user submitting the rating     |
-| `recipe_id`| Identifier linking the rating to a specific recipe|
-| `rating`   | User’s rating (typically on a scale of 1 to 5)    |
-| `date`     | Date the rating or review was submitted           |
 | `review`   | Optional written review                           |
+
 
 These features will be used to build a model capable of predicting the calorie content of a recipe based on its nutritional profile and complexity.
 
-## Step 2: Data Cleaning and Exploratory Data Analysis
+## Data Cleaning and Exploratory Data Analysis
 
 To prepare the dataset for analysis, I carried out a series of data cleaning steps aimed at ensuring the quality and reliability of the information. Below is a breakdown of each step taken.
 
@@ -223,8 +217,41 @@ This is significant because it suggests that **step count could be a useful feat
 
 ## Missing Values
 
-No imputation was performed. Instead, rows with missing values were dropped.
+No imputation was performed. The only imputation perfoemed was shown in the Data Cleaning section. Additionally, **dropna()** was used to drop any null rows.
 
 In this context, imputing nutritional values (like calories, protein, sugar, etc.) isn’t appropriate — these features are specific to the ingredients in each recipe. Filling them with averages or estimates would distort the data and potentially mislead any predictive models.
 
 Out of 234,429 original recipes, 15,198 were removed due to missing values — a **6.48% decrease** in dataset size. This was an acceptable trade-off to preserve data integrity without introducing noise.
+
+## Prediction Problem: Estimating Calories from Recipes
+
+**Type of Prediction Problem:** Regression
+
+---
+
+### Response Variable  
+The target variable for this prediction task is **calories**, which indicates the number of calories in a recipe.
+
+---
+
+### Why This Variable?  
+Calories are a fundamental measure of a recipe's nutritional profile. Being able to estimate calories helps:
+
+- Users make informed dietary decisions  
+- Developers enhance recipe recommendation tools  
+- Nutrition-focused applications provide better value  
+
+---
+
+### Evaluation Metric  
+This model is evaluated using **Mean Squared Error (MSE)**.
+
+---
+
+### Why MSE?  
+MSE is chosen because it:
+
+- Quantifies the average of the squared differences between predicted and actual calorie values  
+- Penalizes larger errors more heavily, helping to reduce extreme inaccuracies  
+- Is a standard metric for regression tasks, offering clear comparability between models  
+
