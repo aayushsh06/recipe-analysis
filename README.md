@@ -147,6 +147,8 @@ After these cleaning steps, the dataset was significantly more structured, with 
  <iframe
  src="assets/calories_boxplot.html"
  frameborder="0"
+  width="800"
+ height="600"
  ></iframe>
 
 The violin plot above visualizes the distribution of calorie values across all recipes, with outliers removed for clarity. The shape of the plot highlights the density of data points — showing that most recipes cluster around the 175–450 calorie range. The thickest part of the distribution, near the median, gives a quick sense of central tendency, while the tails show the spread of higher and lower calorie recipes.
@@ -162,9 +164,9 @@ Understanding this distribution ensures the model is trained on realistic, well-
 
 <iframe
  src="assets/sugar_histogram.html"
- width="600"
- height="400"
  frameborder="0"
+  width="800"
+ height="600"
 ></iframe>
 
 This histogram shows the distribution of sugar content per recipe, with outliers removed. Most recipes contain less than 20 grams of sugar, with a sharp peak around the very low end — possibly indicating savory dishes or low-sugar meals. There is a long right tail, which suggests a minority of recipes (e.g. desserts or drinks) with much higher sugar content.
@@ -184,6 +186,8 @@ This insight can guide feature engineering and help avoid bias in the model’s 
   <iframe
     src="assets/fat_vs_calories.html"
     frameborder="0"
+     width="800"
+ height="600"
     style="display: block; margin: 0 auto; padding: 0;"
   ></iframe>
 </div>
@@ -203,6 +207,8 @@ This boxplot shows how calorie count varies across different levels of total fat
 <iframe
 src="assets/nutrient_bar_chart.html"
 frameborder="0"
+ width="800"
+ height="600"
 ></iframe>
 
 This pivot table groups recipes by the number of steps and shows the average nutritional values for each group. There's a clear upward trend: recipes with more steps tend to have more calories, protein, sugar, and fat.
