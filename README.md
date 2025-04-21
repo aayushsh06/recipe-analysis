@@ -32,17 +32,15 @@ We use two datasets from Food.com.
 **Description:** Contains 83,782 recipes with ingredients, steps, and nutrition information.
 
 **Table 1: Sample from `RAW_recipes.csv`**
-<div style="width: 800px; height: 500px; overflow-x: auto;">
-  <iframe src="./assets/recipes-head.html" style="width: 1000px; border: none;"></iframe>
-</div>
+
+'|    | name                                 |   minutes | nutrition                                     |   n_steps |\n|---:|:-------------------------------------|----------:|:----------------------------------------------|----------:|\n|  0 | 1 brownies in the world    best ever |        40 | [138.4, 10.0, 50.0, 3.0, 3.0, 19.0, 6.0]      |        10 |\n|  1 | 1 in canada chocolate chip cookies   |        45 | [595.1, 46.0, 211.0, 22.0, 13.0, 51.0, 26.0]  |        12 |\n|  2 | 412 broccoli casserole               |        40 | [194.8, 20.0, 6.0, 32.0, 22.0, 36.0, 3.0]     |         6 |\n|  3 | millionaire pound cake               |       120 | [878.3, 63.0, 326.0, 13.0, 20.0, 123.0, 39.0] |         7 |\n|  4 | 2000 meatloaf                        |        90 | [267.0, 30.0, 12.0, 12.0, 29.0, 48.0, 2.0]    |        17 |'
 
 ### Dataset 2: `RAW_interactions.csv`  
 **Description:** Contains 731,927 user reviews and ratings.
 
 **Table 2: Sample from `RAW_interactions.csv`**
-<div style="width: 800px; height: 500px; overflow-x: auto;">
-  <iframe src="./assets/interactions-head.html" style="width: 1000px; border: none;"></iframe>
-</div>
+
+'|    |   recipe_id |   rating | date       |    user_id |\n|---:|------------:|---------:|:-----------|-----------:|\n|  0 |       40893 |        5 | 2011-12-21 |    1293707 |\n|  1 |       85009 |        5 | 2010-02-27 |     126440 |\n|  2 |       85009 |        5 | 2011-10-01 |      57222 |\n|  3 |      120345 |        0 | 2011-08-06 |     124416 |\n|  4 |      120345 |        2 | 2015-05-10 | 2000192946 |'
 
 Note: While this dataset helps understand user preferences, the primary focus for this analysis is on the first dataset, where the nutritional content is available.
 
