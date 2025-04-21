@@ -74,7 +74,7 @@ Note: While this dataset helps understand user preferences, the primary focus fo
 | `saturated_fat`  | Saturated fat content (% Daily Value)            |
 | `n_ingredients`  | Number of ingredients                            |
 | `n_steps`        | Number of preparation steps                      |
-| `review`   | Optional written review                           |
+| `rating`         |Rating between 1 - 5                              |
 
 
 These features will be used to build a model capable of predicting the calorie content of a recipe based on its nutritional profile and complexity.
@@ -217,41 +217,48 @@ This is significant because it suggests that **step count could be a useful feat
 
 ## Missing Values
 
-No imputation was performed. The only imputation perfoemed was shown in the Data Cleaning section. Additionally, **dropna()** was used to drop any null rows.
+The only imputation performed was shown in the Data Cleaning section. 
 
-In this context, imputing nutritional values (like calories, protein, sugar, etc.) isn’t appropriate — these features are specific to the ingredients in each recipe. Filling them with averages or estimates would distort the data and potentially mislead any predictive models.
+In this context, imputing nutritional values (like calories, protein, sugar, etc.) isn’t appropriate — these features are specific to the ingredients in each recipe. Filling them with averages or estimates would distort the data and potentially mislead any predictive models. As a result, **dropna()** was used to drop any null rows.
 
 Out of 234,429 original recipes, 15,198 were removed due to missing values — a **6.48% decrease** in dataset size. This was an acceptable trade-off to preserve data integrity without introducing noise.
 
-## Prediction Problem: Estimating Calories from Recipes
+## Framing a Prediction Problem
 
-**Type of Prediction Problem:** Regression
+### Problem Statement  
+**How can we predict the number of calories in a recipe?**
+
+---
+
+### Type of Prediction Problem  
+**Regression**
+
+This is a regression problem because the target variable, **calories**, is a continuous numerical value. The goal is to predict an exact number rather than assign the input to a predefined category. Since the output can span a wide range of values, this aligns with the nature of regression tasks. If the target were categorical, such as classifying recipes into calorie ranges, it would be a classification problem.
 
 ---
 
 ### Response Variable  
-The target variable for this prediction task is **calories**, which indicates the number of calories in a recipe.
+The target variable in this prediction task is **calories**, representing the total caloric content of a recipe.
 
 ---
 
 ### Why This Variable?  
-Calories are a fundamental measure of a recipe's nutritional profile. Being able to estimate calories helps:
+Calories are a fundamental measure of a recipe's nutritional profile. Estimating calories provides value in several ways:
 
-- Users make informed dietary decisions  
-- Developers enhance recipe recommendation tools  
-- Nutrition-focused applications provide better value  
+- Helps users make informed dietary decisions  
+- Enhances the accuracy of recipe recommendation tools  
+- Supports nutrition-focused applications in delivering better insights  
 
 ---
 
 ### Evaluation Metric  
-This model is evaluated using **Mean Squared Error (MSE)**.
+The model is evaluated using **Mean Squared Error (MSE)**.
 
 ---
 
 ### Why MSE?  
 MSE is chosen because it:
 
-- Quantifies the average of the squared differences between predicted and actual calorie values  
-- Penalizes larger errors more heavily, helping to reduce extreme inaccuracies  
-- Is a standard metric for regression tasks, offering clear comparability between models  
-
+- Quantifies the average squared difference between predicted and actual calorie values  
+- Penalizes larger errors more heavily, encouraging more precise predictions  
+- Is a widely accepted standard for regression problems, enabling clear model comparisons  
