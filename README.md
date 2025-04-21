@@ -262,3 +262,27 @@ MSE is chosen because it:
 - Quantifies the average squared difference between predicted and actual calorie values  
 - Penalizes larger errors more heavily, encouraging more precise predictions  
 - Is a widely accepted standard for regression problems, enabling clear model comparisons  
+
+## Baseline Model
+
+For the baseline regression model, I used two numerical (quantitative) features: **`fat`** and **`carbohydrates`** from the dataset.
+
+- **Quantitative Features**: `fat`, `carbohydrates`  
+- **Ordinal Features**: _None_  
+- **Nominal (Categorical) Features**: _None_  
+
+I didn’t perform any encodings since all selected features were already numerical.
+
+The entire modeling process was implemented using `sklearn`'s `Pipeline` to keep preprocessing and model training streamlined. The model used was `LinearRegression`.
+
+---
+
+## Model Evaluation
+
+Model performance was evaluated using **Mean Squared Error (MSE)**:
+
+- **Training Set**: `8,906.089`  
+- **Validation Set (via K-Fold CV)**: `8,915.768`  
+- **Testing Set**: `10,274.837`
+
+The training and validation errors are very close, suggesting that the model generalizes reasonably well to unseen data and is not overfitting. However, the relatively high error values indicate that there’s room for improvement — likely by incorporating more informative features.
