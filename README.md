@@ -287,7 +287,7 @@ Model performance was evaluated using **Mean Squared Error (MSE)**:
 
 The training and validation errors are very close, suggesting that the model generalizes reasonably well to unseen data and is not overfitting. However, the relatively high error values indicate that there’s room for improvement — likely by incorporating more informative features.
 
-## Final Model Description (Tuned Version)
+## Final Model
 
 The final model uses a `RandomForestRegressor` inside a `Pipeline`, optimized with randomized hyperparameter search. The pipeline includes both preprocessing and modeling steps to ensure consistency and reproducibility.
 
@@ -308,16 +308,17 @@ Total: 10 features
 
 ### Why Each Feature Was Used & Transformed
 
-- `total_fat`: Major calorie contributor (9 cal/g); normalized due to skew.
+- `total_fat`: Major contributor to calories (9 cal/g); normalized due to skew.
 - `carbohydrates`: Key macronutrient (4 cal/g); transformed to stabilize variance.
 - `sodium`: Correlated with processed foods and caloric density; transformed to handle outliers.
 - `sugar`: High sugar usually implies high calories; normalized for consistency.
 - `protein`: Another caloric macro (4 cal/g); normalized to align scales.
-- `fat_carb_ratio`: Captures balance between two major macros; normalized to avoid instability.
+- `fat_carb_ratio`: Captures balance between two major macros and can give insight on calorie density.
 - `macro_total`: Sum of all macros; strong linear signal for calories.
-- `protein_ratio`: Measures protein density; normalized to remove skew.
-- `n_steps`: Proxy for recipe complexity; normalized to handle skewed counts.
-- `rating`: Categorical indicator of food quality or popularity; one-hot encoded.
+- `protein_ratio`: Measures how protein-dense a food is relative to other macronutrients. Including this feature helps the model distinguish between lean/high-protein foods and carb- or fat-dominant ones, even if total protein content is similar. It introduces a relative perspective that improves the model’s understanding of food composition.
+- `n_steps`: Indicates how complex a recipe is to prepare. Recipes with more steps are often richer or more elaborate (e.g., multi-layered meals, sauces), which tend to be higher in calories. Including this feature provides context about the likely richness or simplicity of a dish that raw nutritional values don’t capture.
+- `rating`: A user-generated rating that can reflect how enjoyable or satisfying a food is. Highly rated foods are often indulgent or rich, which can align with higher calorie content. By including this feature, the model incorporates human preference signals that may correlate with calorie density.
+
 
 ### Preprocessing
 
@@ -326,8 +327,23 @@ Total: 10 features
 
 ### Model and Hyperparameter Tuning
 
-- **Model**: `RandomForestRegressor`
-- **Tuning Method**: `RandomizedSearchCV` with 20 combinations, 5-fold cross-validation, using `neg_mean_squared_error` for scoring.
+To improve model performance and prevent overfitting, I used **RandomizedSearchCV** to search for the best combination of hyperparameters for the `RandomForestRegressor`. This method randomly samples a fixed number of combinations from a predefined grid of possible values, rather than exhaustively evaluating all options like `GridSearchCV`. This makes it much more efficient, especially when the search space is large.
+
+The randomized search was run over **20 different combinations**, using **5-fold cross-validation** to ensure reliable validation metrics and avoid depending on a single train/validation split.
+
+**Scoring metric**:  
+- I used **negative mean squared error (neg_MSE)** as the scoring function, since minimizing MSE is the main objective for this regression task.
+
+**Parameters that were tuned**:
+- `model__n_estimators`: Number of trees in the forest  
+- `model__max_depth`: Maximum depth of each tree  
+- `model__min_samples_split`: Minimum number of samples required to split a node  
+- `model__min_samples_leaf`: Minimum number of samples required to be at a leaf node  
+- `model__max_features`: Number of features considered when looking for the best split  
+- `preprocessor__quantile_features__n_quantiles`: Number of quantiles for the `QuantileTransformer`, which affects how distributions are normalized
+
+After tuning, the best combination of parameters was selected based on the lowest validation MSE across the 5 folds.
+
 
 **Best Parameters Found**:
 - `preprocessor__quantile_features__n_quantiles`: 50  
@@ -345,7 +361,7 @@ Total: 10 features
 | Validation MSE | 5,096.49    |
 | Testing MSE    | 8,028.85    |
 
-The trained model demonstrates strong performance, especially in reducing training and validation error compared to previous versions. The slight gap between training and validation error indicates a well-fit model with controlled overfitting.
+The trained model demonstrates stronger performance, especially in reducing training and validation error compared to previous versions. However, the large gap between training and validations shows potential signs of overfitting. 
 
 <iframe
 src="assets/models-comparison.html"
@@ -354,9 +370,19 @@ frameborder="0"
  height="450"
 ></iframe>
 
-### Why the Model Works Well
+### Improvement?
 
-- **Hyperparameter tuning** enabled the Random Forest to balance complexity and generalization.
-- **Quantile transformation** made feature distributions more uniform, improving model splits.
-- **Engineered features** like `macro_total` and `protein_ratio` introduced domain knowledge that enhanced model predictions.
-- **Cross-validation** ensured model performance was robust and not tied to a specific train-test split.
+Yes — the final model is a clear improvement over the baseline, especially where it matters most: **on unseen data**.
+
+The baseline model had a **test MSE of approximately 10,275**, while the tuned final model achieved a significantly lower **test MSE of around 8,029**. This drop of over 2,200 in error demonstrates that the final model generalizes better and makes more accurate predictions when faced with new data.
+
+This improvement is due to several key changes:
+- A much **richer set of features**, including meaningful engineered ones like `macro_total` and `protein_ratio`.
+- Inclusion of contextual variables like `rating` and `n_steps`, which capture patterns that raw nutrition data may miss.
+- Use of a **non-linear model (Random Forest)**, which can model complex interactions that a linear regression simply cannot.
+- Application of **quantile-based scaling** to handle right-skewed distributions with nutrition.
+- **Hyperparameter tuning** via `RandomizedSearchCV` to fine-tune model complexity.
+
+While training and validation MSEs also improved significantly, the ultimate goal is a model that performs well on new, real-world data — and this final model does just that.
+
+
