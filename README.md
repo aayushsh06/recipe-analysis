@@ -148,7 +148,7 @@ After these cleaning steps, the dataset was significantly more structured, with 
  src="assets/calories_boxplot.html"
  frameborder="0"
   width="800"
- height="600"
+ height="450"
  ></iframe>
 
 The violin plot above visualizes the distribution of calorie values across all recipes, with outliers removed for clarity. The shape of the plot highlights the density of data points — showing that most recipes cluster around the 175–450 calorie range. The thickest part of the distribution, near the median, gives a quick sense of central tendency, while the tails show the spread of higher and lower calorie recipes.
