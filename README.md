@@ -287,12 +287,12 @@ Model performance was evaluated using **Mean Squared Error (MSE)**:
 
 The training and validation errors are very close, suggesting that the model generalizes reasonably well to unseen data and is not overfitting. However, the relatively high error values indicate that there’s room for improvement — likely by incorporating more informative features.
 
-## Final Model Description
+## Final Model Description (Tuned Version)
 
-The final model was built using an enriched feature set that includes both original features and engineered ones. The model uses a `RandomForestRegressor` within a `Pipeline` that handles preprocessing and training end-to-end.
+The final model uses a `RandomForestRegressor` inside a `Pipeline`, optimized with randomized hyperparameter search. The pipeline includes both preprocessing and modeling steps to ensure consistency and reproducibility.
 
-### Features Used:
-Total: **10 features**
+### Features Used
+Total: 10 features  
 - **Quantitative Features (9)**:
   - `total_fat`
   - `carbohydrates`
@@ -306,37 +306,57 @@ Total: **10 features**
 - **Nominal Feature (1)**:
   - `rating` (one-hot encoded)
 
-### Preprocessing
-- **Quantitative features** were scaled using `QuantileTransformer` to normalize their distributions.
-- **Nominal feature** (`rating`) was encoded using `OneHotEncoder` with the first category dropped to avoid multicollinearity.
+### Why Each Feature Was Used & Transformed
 
-### Model
-- Estimator: `RandomForestRegressor`
-  - `n_estimators=25`
-  - `max_depth=8`
-  - `min_samples_split=5`
-  - `random_state=42`
+- `total_fat`: Major calorie contributor (9 cal/g); normalized due to skew.
+- `carbohydrates`: Key macronutrient (4 cal/g); transformed to stabilize variance.
+- `sodium`: Correlated with processed foods and caloric density; transformed to handle outliers.
+- `sugar`: High sugar usually implies high calories; normalized for consistency.
+- `protein`: Another caloric macro (4 cal/g); normalized to align scales.
+- `fat_carb_ratio`: Captures balance between two major macros; normalized to avoid instability.
+- `macro_total`: Sum of all macros; strong linear signal for calories.
+- `protein_ratio`: Measures protein density; normalized to remove skew.
+- `n_steps`: Proxy for recipe complexity; normalized to handle skewed counts.
+- `rating`: Categorical indicator of food quality or popularity; one-hot encoded.
+
+### Preprocessing
+
+- **Quantitative features** were transformed using `QuantileTransformer` with `n_quantiles=50`, mapping skewed distributions to a normal shape.
+- **Categorical feature** (`rating`) was encoded using `OneHotEncoder` with the first category dropped to prevent redundancy.
+
+### Model and Hyperparameter Tuning
+
+- **Model**: `RandomForestRegressor`
+- **Tuning Method**: `RandomizedSearchCV` with 20 combinations, 5-fold cross-validation, using `neg_mean_squared_error` for scoring.
+
+**Best Parameters Found**:
+- `preprocessor__quantile_features__n_quantiles`: 50  
+- `model__n_estimators`: 200  
+- `model__max_depth`: None  
+- `model__min_samples_split`: 2  
+- `model__min_samples_leaf`: 2  
+- `model__max_features`: None  
 
 ### Model Evaluation
 
-Model performance based on **Mean Squared Error (MSE)**:
+| Metric         | Value       |
+|----------------|-------------|
+| Training MSE   | 1,127.39    |
+| Validation MSE | 5,096.49    |
+| Testing MSE    | 8,028.85    |
 
-- **Training MSE**: `2,518.073`  
-- **Validation MSE (5-Fold CV)**: `7,296.776`  
-- **Testing MSE**: `8,248.343`
+The trained model demonstrates strong performance, especially in reducing training and validation error compared to previous versions. The slight gap between training and validation error indicates a well-fit model with controlled overfitting.
 
-The training error is much lower than in the baseline model, and both the validation and testing errors also show a clear improvement. While there's a noticeable gap between training and test/validation performance (expected with ensemble methods like Random Forest), the model generalizes significantly better than the baseline.
-
----
+<iframe
+src="assets/models-comparison.html"
+frameborder="0"
+ width="800"
+ height="450"
+></iframe>
 
 ### Why the Model Works Well
 
-- **Richer Feature Set**: Engineered features like `fat_carb_ratio`, `macro_total`, and `protein_ratio` help capture important nutritional relationships that go beyond raw features.
-- **Smart Preprocessing**: `QuantileTransformer` helps correct for skewed feature distributions, improving model sensitivity to less frequent values. One-hot encoding properly handles the nominal `rating` feature.
-- **Robust Model Choice**: `RandomForestRegressor` is well-suited for non-linear data and captures complex interactions between features with minimal tuning.
-- **Regularized Complexity**: Parameters like `max_depth=8` and `min_samples_split=5` prevent overfitting while still allowing for flexibility.
-- **Cross-Validation Stability**: 5-Fold CV ensures the validation score is stable and not reliant on a single data split.
-- **Domain-Relevant Features**: The engineered features align with real-world nutritional reasoning (e.g., macronutrient ratios), which helps the model focus on variables that actually matter for predicting calories.
-
----
-
+- **Hyperparameter tuning** enabled the Random Forest to balance complexity and generalization.
+- **Quantile transformation** made feature distributions more uniform, improving model splits.
+- **Engineered features** like `macro_total` and `protein_ratio` introduced domain knowledge that enhanced model predictions.
+- **Cross-validation** ensured model performance was robust and not tied to a specific train-test split.
