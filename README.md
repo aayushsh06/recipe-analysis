@@ -146,8 +146,8 @@ After these cleaning steps, the dataset was significantly more structured, with 
 
  <iframe
  src="assets/calories_boxplot.html"
- width="800"
- height="600"
+ width="600"
+ height="400"
  frameborder="0"
  ></iframe>
 
@@ -206,7 +206,8 @@ This boxplot shows how calorie count varies across different levels of total fat
 
 <iframe
 src="assets/nutrient_bar_chart.html"
-width="800"
+width="600"
+width="400"
 frameborder="0"
 ></iframe>
 
