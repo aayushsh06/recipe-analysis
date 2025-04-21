@@ -146,8 +146,6 @@ After these cleaning steps, the dataset was significantly more structured, with 
 
  <iframe
  src="assets/calories_boxplot.html"
- width="600"
- height="400"
  frameborder="0"
  ></iframe>
 
@@ -185,8 +183,6 @@ This insight can guide feature engineering and help avoid bias in the model’s 
 <div style="margin: 0; padding: 0;">
   <iframe
     src="assets/fat_vs_calories.html"
-    width="600"
-    height="400"
     frameborder="0"
     style="display: block; margin: 0 auto; padding: 0;"
   ></iframe>
@@ -206,8 +202,6 @@ This boxplot shows how calorie count varies across different levels of total fat
 
 <iframe
 src="assets/nutrient_bar_chart.html"
-width="600"
-width="400"
 frameborder="0"
 ></iframe>
 
