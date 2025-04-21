@@ -164,8 +164,8 @@ Understanding this distribution ensures the model is trained on realistic, well-
 
 <iframe
  src="assets/sugar_histogram.html"
- width="800"
- height="600"
+ width="600"
+ height="400"
  frameborder="0"
 ></iframe>
 
@@ -185,8 +185,8 @@ This insight can guide feature engineering and help avoid bias in the model’s 
 <div style="margin: 0; padding: 0;">
   <iframe
     src="assets/fat_vs_calories.html"
-    width="800"
-    height="600"
+    width="600"
+    height="400"
     frameborder="0"
     style="display: block; margin: 0 auto; padding: 0;"
   ></iframe>
@@ -264,7 +264,7 @@ MSE is chosen because it:
 
 ## Baseline Model
 
-For the baseline regression model, I used two numerical (quantitative) features: **`fat`** and **`carbohydrates`** from the dataset.
+For the baseline regression model, I used fat and carbohydrates as baseline features because they’re key macronutrients that directly impact a food item's nutritional value, especially calorie content. Since both are numerical, they required no encoding and were a simple, effective starting point for evaluating model performance.
 
 - **Quantitative Features**: `fat`, `carbohydrates`  
 - **Ordinal Features**: _None_  
