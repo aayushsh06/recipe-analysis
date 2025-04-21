@@ -208,7 +208,7 @@ This boxplot shows how calorie count varies across different levels of total fat
 src="assets/nutrient_bar_chart.html"
 frameborder="0"
  width="800"
- height="600"
+ height="400"
 ></iframe>
 
 This pivot table groups recipes by the number of steps and shows the average nutritional values for each group. There's a clear upward trend: recipes with more steps tend to have more calories, protein, sugar, and fat.
