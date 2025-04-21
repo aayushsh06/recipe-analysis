@@ -8,7 +8,7 @@
 This project explores recipe and user interaction data from **Food.com**, a major recipe-sharing platform. The dataset includes thousands of recipes, user-submitted ratings, and reviews dating back to 2008.
 
 **Investigative Question:**  
-**How can we predict the number of calories for a recipe in the dataset?**
+How can we predict the number of calories for a recipe in the dataset?
 
 ---
 
@@ -31,7 +31,7 @@ We use two datasets from Food.com.
 ### Dataset 1: `RAW_recipes.csv`  
 **Description:** Contains 83,782 recipes with ingredients, steps, and nutrition information.
 
-###### *Only relevant columns to analysis are being displayed
+###### *Only relevant columns to the analysis are being displayed
 
 **Table 1: Sample from `RAW_recipes.csv`**
 
@@ -105,7 +105,7 @@ I grouped the data by `recipe ID` and computed the mean of the valid (non-missin
 
 ### 4. Merging Average Ratings into the Main Dataset
 
-I merged the calculated average rating back into the main dataset so that each row, which represents a user interaction or review, also included the average rating for the corresponding recipe. This enriched the dataset and allowed for more detailed comparisons and filtering.
+I merged the calculated average rating back into the main dataset so that each row, which represents a user interaction or review, also included the average rating for the corresponding recipe.
 
 ---
 
@@ -132,13 +132,13 @@ After these cleaning steps, the dataset was significantly more structured, with 
 
 ### Preview of the Cleaned DataFrame
 
-| name                                 |   total_fat |   carbohydrates |   sodium |   sugar |   protein |   fat_carb_ratio |   macro_total |   protein_ratio |   rating |   n_steps |
-|:-------------------------------------|------------:|----------------:|---------:|--------:|----------:|-----------------:|--------------:|----------------:|---------:|----------:|
-| 1 brownies in the world    best ever |          10 |               6 |        3 |      50 |         3 |          1.66667 |            19 |        0.157895 |        4 |        10 |
-| 1 in canada chocolate chip cookies   |          46 |              26 |       22 |     211 |        13 |          1.76923 |            85 |        0.152941 |        5 |        12 |
-| 412 broccoli casserole               |          20 |               3 |       32 |       6 |        22 |          6.66666 |            45 |        0.488889 |        5 |         6 |
-| 412 broccoli casserole               |          20 |               3 |       32 |       6 |        22 |          6.66666 |            45 |        0.488889 |        5 |         6 |
-| 412 broccoli casserole               |          20 |               3 |       32 |       6 |        22 |          6.66666 |            45 |        0.488889 |        5 |         6 |
+| name                                 |   total_fat |   carbohydrates |   sodium |   sugar |   protein |   rating_average |   n_steps |
+|:-------------------------------------|------------:|----------------:|---------:|--------:|----------:|-----------------:|----------:|
+| 1 brownies in the world    best ever |          10 |               6 |        3 |      50 |         3 |                4 |        10 |
+| 1 in canada chocolate chip cookies   |          46 |              26 |       22 |     211 |        13 |                5 |        12 |
+| 412 broccoli casserole               |          20 |               3 |       32 |       6 |        22 |                5 |         6 |
+| 412 broccoli casserole               |          20 |               3 |       32 |       6 |        22 |                5 |         6 |
+| 412 broccoli casserole               |          20 |               3 |       32 |       6 |        22 |                5 |         6 |
 
 ## Univariate Analysis
 
