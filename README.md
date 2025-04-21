@@ -5,10 +5,10 @@
 ---
 
 ## Introduction  
-This project explores recipe and user interaction data from **Food.com**, a major recipe-sharing platform. The dataset includes thousands of recipes, user-submitted ratings, and reviews dating back to 2008.
+This project explores recipe and user interaction data from **Food.com**, a major recipe-sharing platform. The dataset includes thousands of recipes, their nutrition, user-submitted ratings, and reviews.
 
 **Investigative Question:**  
-How can we predict the number of calories for a recipe in the dataset?
+How can we predict the number of calories for a recipe?
 
 ---
 
@@ -18,7 +18,6 @@ Understanding how recipe characteristics influence calorie count is important fo
 - People managing their dietary intake  
 - Home cooks aiming to prepare healthier meals  
 - Nutritionists and dietitians creating meal plans  
-- Developers building tools for calorie estimation or recipe recommendation  
 
 By modeling calorie content based on recipe features, we can gain insight into which types of recipes and preparation methods contribute most to total caloric value.
 
@@ -31,7 +30,7 @@ We use two datasets from Food.com.
 ### Dataset 1: `RAW_recipes.csv`  
 **Description:** Contains 83,782 recipes with ingredients, steps, and nutrition information.
 
-###### *Only relevant columns to the analysis are being displayed
+###### *Only a subset of columns from the datasets are being displayed
 
 **Table 1: Sample from `RAW_recipes.csv`**
 
@@ -56,7 +55,7 @@ We use two datasets from Food.com.
 |      120345 |        0 | 2011-08-06 |     124416 |
 |      120345 |        2 | 2015-05-10 | 2000192946 |
 
-Note: While this dataset helps understand user preferences, the primary focus for this analysis is on the first dataset, where the nutritional content is available.
+###### *While the Raw Interactions Dataset helps understand user preferences, the primary focus for this analysis is on the Raw Recipes dataset, where the nutritional content is available.
 
 ---
 
@@ -67,7 +66,7 @@ Note: While this dataset helps understand user preferences, the primary focus fo
 | Column           | Description                                      |
 |------------------|--------------------------------------------------|
 | `calories`       | Number of calories per serving (target variable) |
-| `total_fat`      | Total fat content (% Daily Value)                |
+| `total_fat`      | Total fat content (grams)                        |
 | `sugar`          | Sugar content (% Daily Value)                    |
 | `sodium`         | Sodium content (% Daily Value)                   |
 | `protein`        | Protein content (% Daily Value)                  |
@@ -151,12 +150,11 @@ After these cleaning steps, the dataset was significantly more structured, with 
  height="450"
  ></iframe>
 
-The violin plot above visualizes the distribution of calorie values across all recipes, with outliers removed for clarity. The shape of the plot highlights the density of data points — showing that most recipes cluster around the 175–450 calorie range. The thickest part of the distribution, near the median, gives a quick sense of central tendency, while the tails show the spread of higher and lower calorie recipes.
+The violin plot above visualizes the distribution of calorie values across all recipes, with outliers removed for clarity. The shape of the plot highlights the density of data points — showing that most recipes cluster around the 175–450 calorie range. The thickest part of the distribution, near the median, gives a quick sense of central tendency, while the tails show a right skew on the data.
 
 This visualization is particularly useful for the calorie prediction task ahead. It helps identify:
 - The skewness of the distribution, which could impact model selection or preprocessing.
 - Natural calorie clusters that could hint at underlying recipe types.
-- Any residual outliers or irregular patterns that may need special handling.
 
 Understanding this distribution ensures the model is trained on realistic, well-ordered data.
 
@@ -169,14 +167,14 @@ Understanding this distribution ensures the model is trained on realistic, well-
  height="450"
 ></iframe>
 
-This histogram shows the distribution of sugar content per recipe, with outliers removed. Most recipes contain less than 20 grams of sugar, with a sharp peak around the very low end — possibly indicating savory dishes or low-sugar meals. There is a long right tail, which suggests a minority of recipes (e.g. desserts or drinks) with much higher sugar content.
+This histogram shows the distribution of sugar content per recipe, with outliers removed. Most recipes contain less than 20% of the daily value of sugar, with a sharp peak around the very low end — possibly indicating savory dishes or low-sugar meals. There is a long right tail, which suggests a minority of recipes (e.g. desserts or drinks) with much higher sugar content.
 
 Understanding this distribution is crucial for building a calorie prediction model. Since sugar is often a strong contributor to calorie count, observing its skew and overall spread helps in:
 - Identifying whether transformations are needed to correct skewness (e.g., QuantileTransformer).
 - Spotting imbalances in recipe types (sweet vs. savory).
 - Assessing the influence of sugar on calorie predictions.
 
-This insight can guide feature engineering and help avoid bias in the model’s output.
+This insight can guide feature engineering pertaining to sugar for the final model.
 
 ## Bivariate Analysis
 
@@ -192,13 +190,15 @@ This insight can guide feature engineering and help avoid bias in the model’s 
   ></iframe>
 </div>
 
-This boxplot shows how calorie count varies across different levels of total fat content, with outliers removed. There's a clear upward trend — as total fat increases, so do the calories. The distribution also widens, indicating more variability in high-fat recipes. This supports the idea that total fat is a strong predictor of calories, and will likely be an important feature in the calorie prediction model.
+These grouped boxplots show how calorie count varies across different levels of total fat content, with outliers removed. There's a clear upward trend — as total fat increases, so do the calories. The distribution also widens, indicating more variability in high-fat recipes. This supports the idea that total fat is a strong predictor of calories and will likely be an important feature in the calorie prediction model. The consistent increase in medians across bins shows a strong positive correlation between total fat and calorie count. Additionally, the widening interquartile ranges at higher fat levels suggest that calorie content becomes more dispersed, possibly due to the inclusion of richer, more energy-dense foods.
+
+This plot directly addresses the question of whether fat content can help predict calories, and the visible trends strongly support that relationship.
 
 ## Aggregate Analysis
 
 ### Average Nutrient Values by Steps Group
 
-| Steps Group | Calories | Protein | Sugar | Total Fat |
+| Steps Group | Calories | Protein(PDV) | Sugar(PDV) | Total Fat(PDV) |
 |-------------|----------|---------|-------|-----------|
 | Low         | 316.7    | 21.6    | 25.4  | 20.4      |
 | Medium      | 423.8    | 29.2    | 30.4  | 29.4      |
