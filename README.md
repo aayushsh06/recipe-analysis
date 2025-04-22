@@ -374,7 +374,7 @@ After tuning, the best combination of parameters was selected based on the lowes
 | Validation MSE | 5090.05     |
 | Testing MSE    | 8680.47     |
 
-The trained model demonstrates stronger performance, especially in reducing training and validation error compared to previous versions. However, the large gap between training and validations shows potential signs of overfitting. 
+The final model demonstrates stronger performance, especially in reducing training and validation error compared to the baseline. However, the large gap between training and validations shows potential signs of overfitting. 
 
 <iframe
 src="assets/models-comparison.html"
