@@ -78,6 +78,9 @@ We use two datasets from Food.com.
 
 These features will be used to build a model capable of predicting the calorie content of a recipe based on its nutritional profile and complexity.
 
+---
+---
+
 ## Data Cleaning and Exploratory Data Analysis
 
 To prepare the dataset for analysis, I carried out a series of data cleaning steps aimed at ensuring the quality and reliability of the information. Below is a breakdown of each step taken.
@@ -223,9 +226,12 @@ In this context, imputing nutritional values (like calories, protein, sugar, etc
 
 Out of 234,429 original recipes, 15,198 were removed due to missing values — a **6.48% decrease** in dataset size. This was an acceptable trade-off to preserve data integrity without introducing noise.
 
+---
+---
+
 ## Framing a Prediction Problem
 
-### Problem Statement  
+### Problem Statement:  
 **How can we predict the number of calories in a recipe?**
 
 ---
@@ -247,7 +253,8 @@ Calories are a fundamental measure of a recipe's nutritional profile. Estimating
 
 - Helps users make informed dietary decisions  
 - Enhances the accuracy of recipe recommendation tools  
-- Supports nutrition-focused applications in delivering better insights  
+- Supports nutrition-focused applications in delivering better insights 
+- MSE is a good indicator of overfitting as well 
 
 ---
 
@@ -262,6 +269,9 @@ MSE is chosen because it:
 - Quantifies the average squared difference between predicted and actual calorie values  
 - Penalizes larger errors more heavily, encouraging more precise predictions  
 - Is a widely accepted standard for regression problems, enabling clear model comparisons  
+
+---
+---
 
 ## Baseline Model
 
@@ -286,6 +296,9 @@ Model performance was evaluated using **Mean Squared Error (MSE)**:
 - **Testing Set**: `10,274.837`
 
 The training and validation errors are very close, suggesting that the model generalizes reasonably well to unseen data and is not overfitting. However, the relatively high error values indicate that there’s room for improvement — likely by incorporating more informative features.
+
+---
+---
 
 ## Final Model
 
