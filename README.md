@@ -361,8 +361,8 @@ After tuning, the best combination of parameters was selected based on the lowes
 **Best Parameters Found**:
 - `preprocessor__quantile_features__n_quantiles`: 50  
 - `model__n_estimators`: 200  
-- `model__max_depth`: None  
-- `model__min_samples_split`: 2  
+- `model__max_depth`: 10  
+- `model__min_samples_split`: 5  
 - `model__min_samples_leaf`: 2  
 - `model__max_features`: None  
 
