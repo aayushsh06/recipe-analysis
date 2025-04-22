@@ -370,9 +370,9 @@ After tuning, the best combination of parameters was selected based on the lowes
 
 | Metric         | Value       |
 |----------------|-------------|
-| Training MSE   | 1,118.59    |
-| Validation MSE | 3,672.80    |
-| Testing MSE    | 7,814.63    |
+| Training MSE   | 1892.21     |
+| Validation MSE | 5090.05     |
+| Testing MSE    | 8680.47     |
 
 The trained model demonstrates stronger performance, especially in reducing training and validation error compared to previous versions. However, the large gap between training and validations shows potential signs of overfitting. 
 
@@ -387,7 +387,7 @@ frameborder="0"
 
 Yes — the final model is a clear improvement over the baseline, especially where it matters most: **on unseen data**.
 
-The baseline model had a **test MSE of approximately 10,275**, while the tuned final model achieved a significantly lower **test MSE of around 7,814.63**. This drop of over 2,200 in error demonstrates that the final model generalizes better and makes more accurate predictions when faced with new data.
+The baseline model had a **test MSE of approximately 10,275**, while the tuned final model achieved a significantly lower **test MSE of around 8680.47**. This drop of over 1,400 in error demonstrates that the final model generalizes better and makes more accurate predictions when faced with new data.
 
 This improvement is due to several key changes:
 - A much **richer set of features**, including meaningful engineered ones like `macro_total` and `protein_ratio`.
