@@ -66,7 +66,7 @@ We use two datasets from Food.com.
 | Column           | Description                                      |
 |------------------|--------------------------------------------------|
 | `calories`       | Number of calories per serving (target variable) |
-| `total_fat`      | Total fat content (grams)                        |
+| `total_fat`      | Total fat content (% Daily Value)                        |
 | `sugar`          | Sugar content (% Daily Value)                    |
 | `sodium`         | Sodium content (% Daily Value)                   |
 | `protein`        | Protein content (% Daily Value)                  |
@@ -75,6 +75,7 @@ We use two datasets from Food.com.
 | `n_steps`        | Number of preparation steps                      |
 | `rating`         |Rating between 1 - 5                              |
 
+###### *Nutrition-based columns were obtained during data cleaning
 
 These features will be used to build a model capable of predicting the calorie content of a recipe based on its nutritional profile and complexity.
 
