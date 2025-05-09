@@ -194,7 +194,7 @@ This insight can guide feature engineering pertaining to sugar for the final mod
   ></iframe>
 </div>
 
-These grouped boxplots show how calorie count varies across different levels of total fat content, with outliers removed. There's a clear upward trend — as total fat increases, so do the calories. The distribution also widens, indicating more variability in high-fat recipes. This supports the idea that total fat is a strong predictor of calories and will likely be an important feature in the calorie prediction model. The consistent increase in medians across bins shows a strong positive correlation between total fat and calorie count. Additionally, the widening interquartile ranges at higher fat levels suggest that calorie content becomes more dispersed, possibly due to the inclusion of richer, more energy-dense foods.
+These grouped boxplots show how calorie counts varies across different levels of total fat content, with outliers removed. There's a clear upward trend — as total fat increases, so do the calories. The distribution also widens, indicating more variability in high-fat recipes. This supports the idea that total fat is a strong predictor of calories and will likely be an important feature in the calorie prediction model. The consistent increase in medians across bins shows a strong positive correlation between total fat and calorie count. Additionally, the widening interquartile ranges at higher fat levels suggest that calorie content becomes more dispersed, possibly due to the inclusion of richer, more energy-dense foods.
 
 This plot directly addresses the question of whether fat content can help predict calories, and the visible trends strongly support that relationship.
 
